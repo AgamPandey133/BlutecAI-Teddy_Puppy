@@ -33,6 +33,14 @@ export function Template({html,path,query,curtain,search,onSearch,onQuery,onOpen
     const children=()=>domToReact(el.children as DOMNode[],options);
     const render=(extra:Record<string,unknown>={})=>createElement(el.name,{...props,...extra},...(['img','input','br','hr','source','area','wbr'].includes(el.name)?[]:[children()]));
     if(el.name==='script'||el.name==='template')return <></>;
+    if(el.name==='img'){
+      const style={...(props.style as CSSProperties)};
+      if(typeof style.backgroundImage==='string'&&style.backgroundImage.includes('data:image')){
+        delete style.backgroundImage;
+        delete style.backgroundColor;
+      }
+      return createElement('img',{...props,style,loading:'eager'});
+    }
     // The live React journey supplies these; omit inert server-rendered copies.
     if(has(el,'pup-layer')||has(el,'pup-probe')||has(el,'pup-prints'))return <></>;
     if(has(el,'tp-curtain'))return render({'data-state':curtain||'idle'});
