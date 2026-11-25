@@ -2,7 +2,7 @@ import {useEffect, useRef, useState} from 'react';
 import type {CSSProperties, FormEvent, ReactNode} from 'react';
 import type {Media, Puppy} from '../types';
 
-export const WHATSAPP = "https://wa.me/971541676733?text=Hi%20TeddyPups!%20I'd%20love%20to%20know%20more%20about%20your%20puppies.";
+export const WHATSAPP = "https://wa.me/971500000000?text=Hi%20TeddyPups!%20I'd%20love%20to%20know%20more%20about%20your%20puppies.";
 
 export function MediaImage({media, className = '', contain = false}: {media: Media; className?: string; contain?: boolean}) {
   const image = media.kind === 'video' ? media.poster || media : media;
@@ -112,7 +112,7 @@ export function EnquiryForm({children,className,puppy}: {children:ReactNode;clas
       timers.current.push(setTimeout(()=>setPhase('sent'),1700));
     }catch(err){setError(err instanceof Error?err.message:'Unable to send enquiry.');setPhase('idle');}
   }
-  const link=puppy?`https://wa.me/971541676733?text=${encodeURIComponent(`Hi TeddyPups! I'm interested in ${puppy.displayName}, the ${puppy.breed}.`)}`:WHATSAPP;
+  const link=puppy?`https://wa.me/971500000000?text=${encodeURIComponent(`Hi TeddyPups! I'm interested in ${puppy.displayName}, the ${puppy.breed}.`)}`:WHATSAPP;
   return <div className={`clone-enquiry ${letter?'clone-enquiry--letter':''}`} data-phase={phase}>
     {phase!=='sent'&&<form ref={form} className={className} onSubmit={submit}><fieldset disabled={phase!=='idle'}>{children}</fieldset>{error&&<p role="alert" className="clone-error">{error}</p>}</form>}
     {letter&&(phase==='sealing'||phase==='posting')&&<div className="tp-post__scene" aria-hidden="true"><svg viewBox="0 0 160 112" className="tp-post__envelope"><rect x="4" y="18" width="152" height="90" rx="6" fill="#fffdf8" stroke="#2a170e" strokeWidth="4"/><path d="M6 104 64 62M154 104 96 62" fill="none" stroke="#2a170e" strokeWidth="3"/><path className="tp-post__flap" d="M6 22 80 74 154 22" fill="#fbe3b4" stroke="#2a170e" strokeWidth="4"/><circle cx="80" cy="72" r="11" fill="#a24a1a"/></svg><svg viewBox="0 0 200 260" className="tp-post__box"><rect x="86" y="170" width="28" height="86" fill="#5a3a28" stroke="#2a170e" strokeWidth="4"/><path d="M30 70a70 54 0 0 1 140 0v104H30z" fill="#c2622b" stroke="#2a170e" strokeWidth="5"/><rect x="58" y="86" width="84" height="14" rx="7" fill="#2a170e"/><g className="tp-post__flag"><path d="M170 120V64" stroke="#2a170e" strokeWidth="5"/><path d="M170 64h22v16h-22" fill="#f2be6b" stroke="#2a170e" strokeWidth="4"/></g></svg></div>}
